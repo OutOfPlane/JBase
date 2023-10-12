@@ -2,9 +2,9 @@
 #include "driver/i2c.h"
 #include <cstring>
 
-using namespace gardener;
+using namespace jFramework;
 
-i2cPort::i2cPort(const char *name, i2cPortNumber portNumber, uint8_t SCL_PIN, uint8_t SDA_PIN) : gardenObject(name)
+i2cPort::i2cPort(const char *name, i2cPortNumber portNumber, uint8_t SCL_PIN, uint8_t SDA_PIN) : jObject(name)
 {
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
@@ -21,102 +21,102 @@ i2cPort::i2cPort(const char *name, i2cPortNumber portNumber, uint8_t SCL_PIN, ui
     i2c_driver_install(portNumber, I2C_MODE_MASTER, 0, 0, 0);
 }
 
-g_err gardener::i2cPort::w(uint8_t device, uint8_t *data, uint16_t len)
+j_err jFramework::i2cPort::w(uint8_t device, uint8_t *data, uint16_t len)
 {
     esp_err_t erg = i2c_master_write_to_device(_port, device, data, len, 10);
     if (erg == ESP_OK)
-        return G_OK;
+        return J_OK;
     if (erg == ESP_FAIL)
-        return G_ERR_HARDWARE;
+        return J_ERR_HARDWARE;
     if (erg == ESP_ERR_TIMEOUT)
-        return G_ERR_TIMEOUT;
+        return J_ERR_TIMEOUT;
     if (erg == ESP_ERR_INVALID_ARG)
-        return G_ERR_INVALID_ARGS;
+        return J_ERR_INVALID_ARGS;
     if (erg == ESP_ERR_INVALID_STATE)
-        return G_ERR_INVALID_STATE;
-    return G_ERR_UNK;
+        return J_ERR_INVALID_STATE;
+    return J_ERR_UNK;
 }
 
-g_err gardener::i2cPort::w8(uint8_t device, uint8_t data)
+j_err jFramework::i2cPort::w8(uint8_t device, uint8_t data)
 {
     esp_err_t erg = i2c_master_write_to_device(_port, device, &data, 1, 10);
     if (erg == ESP_OK)
-        return G_OK;
+        return J_OK;
     if (erg == ESP_FAIL)
-        return G_ERR_HARDWARE;
+        return J_ERR_HARDWARE;
     if (erg == ESP_ERR_TIMEOUT)
-        return G_ERR_TIMEOUT;
+        return J_ERR_TIMEOUT;
     if (erg == ESP_ERR_INVALID_ARG)
-        return G_ERR_INVALID_ARGS;
+        return J_ERR_INVALID_ARGS;
     if (erg == ESP_ERR_INVALID_STATE)
-        return G_ERR_INVALID_STATE;
-    return G_ERR_UNK;
+        return J_ERR_INVALID_STATE;
+    return J_ERR_UNK;
 }
 
-g_err gardener::i2cPort::w8r8(uint8_t device, uint8_t address, uint8_t data)
+j_err jFramework::i2cPort::w8r8(uint8_t device, uint8_t address, uint8_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w8r16(uint8_t device, uint16_t address, uint8_t data)
+j_err jFramework::i2cPort::w8r16(uint8_t device, uint16_t address, uint8_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w8r32(uint8_t device, uint32_t address, uint8_t data)
+j_err jFramework::i2cPort::w8r32(uint8_t device, uint32_t address, uint8_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w16r8(uint8_t device, uint8_t address, uint16_t data)
+j_err jFramework::i2cPort::w16r8(uint8_t device, uint8_t address, uint16_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w16r16(uint8_t device, uint16_t address, uint16_t data)
+j_err jFramework::i2cPort::w16r16(uint8_t device, uint16_t address, uint16_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w16r32(uint8_t device, uint32_t address, uint16_t data)
+j_err jFramework::i2cPort::w16r32(uint8_t device, uint32_t address, uint16_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w32r8(uint8_t device, uint8_t address, uint32_t data)
+j_err jFramework::i2cPort::w32r8(uint8_t device, uint8_t address, uint32_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w32r16(uint8_t device, uint16_t address, uint32_t data)
+j_err jFramework::i2cPort::w32r16(uint8_t device, uint16_t address, uint32_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::w32r32(uint8_t device, uint32_t address, uint32_t data)
+j_err jFramework::i2cPort::w32r32(uint8_t device, uint32_t address, uint32_t data)
 {
     std::memcpy(buf, &address, sizeof(address));
     std::memcpy(buf + sizeof(address), &data, sizeof(data));
     return w(device, buf, sizeof(address) + sizeof(data));
 }
 
-g_err gardener::i2cPort::present(uint8_t device, bool &isPresent)
+j_err jFramework::i2cPort::present(uint8_t device, bool &isPresent)
 {
     // Source: https://gist.github.com/herzig/8d4c13d8b81a77ac86481c6c1306bb12
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -127,71 +127,71 @@ g_err gardener::i2cPort::present(uint8_t device, bool &isPresent)
     i2c_cmd_link_delete(cmd);
     isPresent = (erg == ESP_OK);
 
-    return g_err_translate(erg);
+    return j_err_translate(erg);
 }
 
-g_err gardener::i2cPort::r(uint8_t device, uint8_t *data, uint16_t len)
+j_err jFramework::i2cPort::r(uint8_t device, uint8_t *data, uint16_t len)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_read_from_device(_port, device, data, len, 10));
 }
 
-g_err gardener::i2cPort::r8(uint8_t device, uint8_t &data)
+j_err jFramework::i2cPort::r8(uint8_t device, uint8_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_read_from_device(_port, device, &data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r8r8(uint8_t device, uint8_t address, uint8_t &data)
+j_err jFramework::i2cPort::r8r8(uint8_t device, uint8_t address, uint8_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r8r16(uint8_t device, uint16_t address, uint8_t &data)
+j_err jFramework::i2cPort::r8r16(uint8_t device, uint16_t address, uint8_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r8r32(uint8_t device, uint32_t address, uint8_t &data)
+j_err jFramework::i2cPort::r8r32(uint8_t device, uint32_t address, uint8_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r16r8(uint8_t device, uint8_t address, uint16_t &data)
+j_err jFramework::i2cPort::r16r8(uint8_t device, uint8_t address, uint16_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r16r16(uint8_t device, uint16_t address, uint16_t &data)
+j_err jFramework::i2cPort::r16r16(uint8_t device, uint16_t address, uint16_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r16r32(uint8_t device, uint32_t address, uint16_t &data)
+j_err jFramework::i2cPort::r16r32(uint8_t device, uint32_t address, uint16_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r32r8(uint8_t device, uint8_t address, uint32_t &data)
+j_err jFramework::i2cPort::r32r8(uint8_t device, uint8_t address, uint32_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r32r16(uint8_t device, uint16_t address, uint32_t &data)
+j_err jFramework::i2cPort::r32r16(uint8_t device, uint16_t address, uint32_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }
 
-g_err gardener::i2cPort::r32r32(uint8_t device, uint32_t address, uint32_t &data)
+j_err jFramework::i2cPort::r32r32(uint8_t device, uint32_t address, uint32_t &data)
 {
-    return g_err_translate(
+    return j_err_translate(
         i2c_master_write_read_device(_port, device, (uint8_t*)&address, sizeof(address), (uint8_t*)&data, sizeof(data), 10));
 }

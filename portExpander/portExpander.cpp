@@ -1,9 +1,9 @@
 #include "portExpander.hpp"
 
-using namespace gardener;
+using namespace jFramework;
 
-gardener::portExpander::portExpander(const char *name)
-: gardenObject(name)
+jFramework::portExpander::portExpander(const char *name)
+: jObject(name)
 {
 }
 
@@ -17,27 +17,27 @@ portExpanderPin::~portExpanderPin()
 {
 }
 
-g_err gardener::portExpanderPin::mode(pinDirection dir)
+j_err jFramework::portExpanderPin::mode(pinDirection dir)
 {
     return _port->setPinDirection(_pinNumber, dir);
 }
 
-g_err gardener::portExpanderPin::set(uint8_t value)
+j_err jFramework::portExpanderPin::set(uint8_t value)
 {
     return _port->setPin(_pinNumber, value);
 }
 
-g_err gardener::portExpanderPin::get(uint8_t &value)
+j_err jFramework::portExpanderPin::get(uint8_t &value)
 {
     return _port->getPin(_pinNumber, value);
 }
 
-bool gardener::portExpanderPin::canSet()
+bool jFramework::portExpanderPin::canSet()
 {
     return _port->canGetPin(_pinNumber);
 }
 
-bool gardener::portExpanderPin::canGet()
+bool jFramework::portExpanderPin::canGet()
 {
     return _port->canGetPin(_pinNumber);
 }

@@ -1,4 +1,4 @@
-#include "gardenObject.hpp"
+#include "jObject.hpp"
 
 // extenal codes
 // NVS
@@ -31,45 +31,45 @@
 
 #define ESP_ERR_NVS_CONTENT_DIFFERS (ESP_ERR_NVS_BASE + 0x18) /*!< Internal error; never returned by nvs API functions.  NVS key is different in comparison */
 
-using namespace gardener;
+using namespace jFramework;
 
 #define X(typeID, name) name,
-const char *gardener::g_errToString[]{
-    G_ERROR_CODES};
+const char *jFramework::j_errToString[]{
+    J_ERROR_CODES};
 #undef X
 
-g_err gardener::g_err_translate(esp_err_t e)
+j_err jFramework::j_err_translate(esp_err_t e)
 {
     if (e == ESP_OK)
-        return G_OK;
+        return J_OK;
     if (e == ESP_FAIL)
-        return G_ERR_HARDWARE;
+        return J_ERR_HARDWARE;
     if (e == ESP_ERR_TIMEOUT)
-        return G_ERR_TIMEOUT;
+        return J_ERR_TIMEOUT;
     if (e == ESP_ERR_INVALID_ARG)
-        return G_ERR_INVALID_ARGS;
+        return J_ERR_INVALID_ARGS;
     if (e == ESP_ERR_INVALID_STATE)
-        return G_ERR_INVALID_STATE;
+        return J_ERR_INVALID_STATE;
     if (e == ESP_ERR_NVS_NOT_FOUND)
-        return G_ERR_KEY_NOT_FOUND;
+        return J_ERR_KEY_NOT_FOUND;
     if (e == ESP_ERR_NVS_INVALID_HANDLE)
-        return G_ERR_INVALID_STATE;
+        return J_ERR_INVALID_STATE;
     if (e == ESP_ERR_NVS_INVALID_NAME)
-        return G_ERR_INVALID_ARGS;
+        return J_ERR_INVALID_ARGS;
     if (e == ESP_ERR_NVS_INVALID_LENGTH)
-        return G_ERR_NOMEM;
+        return J_ERR_NOMEM;
 
-    return G_ERR_UNK;
+    return J_ERR_UNK;
 }
 
-gardenObject::gardenObject(const char *name) : _name(name)
+jObject::jObject(const char *name) : _name(name)
 {
     _mutex = xSemaphoreCreateBinary();
     xSemaphoreGive(_mutex);
     _locked = false;
 }
 
-bool gardenObject::lock(gardenObject &lockedBy, uint32_t timeout)
+bool jObject::lock(jObject &lockedBy, uint32_t timeout)
 {
     if (xSemaphoreTake(_mutex, timeout / portTICK_PERIOD_MS) == pdTRUE)
     {
@@ -80,21 +80,21 @@ bool gardenObject::lock(gardenObject &lockedBy, uint32_t timeout)
     return false;
 }
 
-void gardener::gardenObject::unlock()
+void jFramework::jObject::unlock()
 {
     _lockedBy = nullptr;
     _locked = false;
     xSemaphoreGive(_mutex);
 }
 
-const char *gardener::gardenObject::lockedBy()
+const char *jFramework::jObject::lockedBy()
 {
     if (_lockedBy)
         return _lockedBy;
     return "NONE";
 }
 
-const char *gardener::gardenObject::getName()
+const char *jFramework::jObject::getName()
 {
     return _name;
 }

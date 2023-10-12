@@ -1,8 +1,8 @@
 #include <statemachine.hpp>
 
-using namespace gardener;
+using namespace jFramework;
 
-condition::condition(const char *name, bool (*testAction)(void)) : gardenObject(name)
+condition::condition(const char *name, bool (*testAction)(void)) : jObject(name)
 {
     _testAction = testAction;
 }
@@ -13,7 +13,7 @@ void condition::printState()
 }
 
 statemachine::statemachine(const char *name, uint32_t numStates)
-    : gardenObject(name), _numStates(numStates)
+    : jObject(name), _numStates(numStates)
 {
     _currentState = 0;
     _enterStateCallbacks = new enterStateCB[numStates];

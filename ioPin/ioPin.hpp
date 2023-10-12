@@ -1,9 +1,9 @@
-#ifndef G_IO_PIN_H
-#define G_IO_PIN_H
+#ifndef J_IO_PIN_H
+#define J_IO_PIN_H
 
-#include "gardenObject.hpp"
+#include "jObject.hpp"
 
-namespace gardener
+namespace jFramework
 {
     enum pinDirection
     {
@@ -16,20 +16,20 @@ namespace gardener
         PIN_OUTPUT_PWM
     };
 
-    class ioPin : public gardenObject
+    class ioPin : public jObject
     {
     public:
         ioPin(const char *name, uint8_t pinNumber);
         virtual ~ioPin() {}
         uint8_t getNumber();
         bool isConnected();
-        virtual g_err mode(pinDirection dir) { return G_ERR_NO_IMPLEMENTATION; }
-        virtual g_err set(uint8_t value) { return G_ERR_NO_IMPLEMENTATION; }
-        virtual g_err get(uint8_t &value) { return G_ERR_NO_IMPLEMENTATION; }
+        virtual j_err mode(pinDirection dir) { return J_ERR_NO_IMPLEMENTATION; }
+        virtual j_err set(uint8_t value) { return J_ERR_NO_IMPLEMENTATION; }
+        virtual j_err get(uint8_t &value) { return J_ERR_NO_IMPLEMENTATION; }
         virtual bool canSet() { return false; }
         virtual bool canGet() { return false; }
-        virtual g_err setVoltage(int32_t voltage_mV) { return G_ERR_NO_IMPLEMENTATION; }
-        virtual g_err getVoltage(int32_t &voltage_mV) { return G_ERR_NO_IMPLEMENTATION; }
+        virtual j_err setVoltage(int32_t voltage_mV) { return J_ERR_NO_IMPLEMENTATION; }
+        virtual j_err getVoltage(int32_t &voltage_mV) { return J_ERR_NO_IMPLEMENTATION; }
         static ioPin *dummyPin();
 
     protected:
@@ -45,9 +45,9 @@ namespace gardener
     public:
         ioPinDummy(const char *name);
         ~ioPinDummy();
-        g_err mode(pinDirection dir);
-        g_err set(uint8_t value);
-        g_err get(uint8_t &value);
+        j_err mode(pinDirection dir);
+        j_err set(uint8_t value);
+        j_err get(uint8_t &value);
         bool canSet();
         bool canGet();
 
@@ -58,6 +58,6 @@ namespace gardener
         static ioPin *_dummyPin;
     };
 
-} // namespace gardener
+} // namespace jFramework
 
 #endif

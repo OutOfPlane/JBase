@@ -1,12 +1,12 @@
-#ifndef G_CONFIG_STORAGE_H
-#define G_CONFIG_STORAGE_H
+#ifndef J_CONFIG_STORAGE_H
+#define J_CONFIG_STORAGE_H
 
-#include "gardenObject.hpp"
+#include "jObject.hpp"
 
-namespace gardener
+namespace jFramework
 {
 
-    class configStorage : public gardenObject
+    class configStorage : public jObject
     {
     public:
         configStorage(const char *name);
@@ -15,6 +15,6 @@ namespace gardener
     protected:
     private:
     };
-} // namespace gardener
+} // namespace jFramework
 
 #endif

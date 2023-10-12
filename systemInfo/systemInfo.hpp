@@ -1,10 +1,10 @@
-#ifndef G_SYSTEM_INFO_H
-#define G_SYSTEM_INFO_H
+#ifndef J_SYSTEM_INFO_H
+#define J_SYSTEM_INFO_H
 
 #include <stdint.h>
 #include <stdio.h>
 
-namespace gardener
+namespace jFramework
 {
     enum PCBRevision{
         PCB_Revision_Unknown,

@@ -1,8 +1,8 @@
 #include "configStorage.hpp"
 
-using namespace gardener;
+using namespace jFramework;
 
 configStorage::configStorage(const char *name)
-:gardenObject(name)
+:jObject(name)
 {
 }

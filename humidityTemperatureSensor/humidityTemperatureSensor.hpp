@@ -1,21 +1,21 @@
-#ifndef G_HUMIDITY_TEMPERATURE_H
-#define G_HUMIDITY_TEMPERATURE_H
+#ifndef J_HUMIDITY_TEMPERATURE_H
+#define J_HUMIDITY_TEMPERATURE_H
 
-#include "gardenObject.hpp"
+#include "jObject.hpp"
 
-namespace gardener
+namespace jFramework
 {
-    class humidityTemperatureSensor : public gardenObject
+    class humidityTemperatureSensor : public jObject
     {
     public:
         humidityTemperatureSensor(const char *name);
         virtual ~humidityTemperatureSensor() {}
-        virtual g_err getHumidity(int32_t &relhumidity_promill) { return G_ERR_NO_IMPLEMENTATION; }
-        virtual g_err getTemperature(int32_t &temperature_dezideg) { return G_ERR_NO_IMPLEMENTATION; }
+        virtual j_err getHumidity(int32_t &relhumidity_promill) { return J_ERR_NO_IMPLEMENTATION; }
+        virtual j_err getTemperature(int32_t &temperature_dezideg) { return J_ERR_NO_IMPLEMENTATION; }
 
     protected:
     private:
     };
-} // namespace gardener
+} // namespace jFramework
 
 #endif

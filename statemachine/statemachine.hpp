@@ -1,11 +1,11 @@
-#ifndef G_STATEMACHINE_H
-#define G_STATEMACHINE_H
+#ifndef J_STATEMACHINE_H
+#define J_STATEMACHINE_H
 
-#include <gardenObject.hpp>
+#include <jObject.hpp>
 
-namespace gardener
+namespace jFramework
 {
-    class condition : public gardenObject
+    class condition : public jObject
     {
     public:
         condition(const char *name, bool (*testAction)(void));
@@ -28,7 +28,7 @@ namespace gardener
         bool (*_testAction)(void) = nullptr;
     };
 
-    class statemachine : public gardenObject
+    class statemachine : public jObject
     {
         typedef void (*enterStateCB)(void);
 

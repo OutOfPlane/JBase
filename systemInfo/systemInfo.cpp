@@ -4,13 +4,13 @@
 #include "driver/gpio.h"
 #include "buildnumber.hpp"
 
-using namespace gardener;
+using namespace jFramework;
 
 char firmwareShort[32] = {0};
 char firmwareLong[64] = {0};
 
 
-sysInfo_t gardener::identifySystem()
+sysInfo_t jFramework::identifySystem()
 {
     sysInfo_t info;
 
@@ -18,10 +18,10 @@ sysInfo_t gardener::identifySystem()
     info.software.IDFVer = IDF_VER;
     info.software.firmware.buildDate = __DATE__;
     info.software.firmware.buildTime = __TIME__;
-    info.software.firmware.major = G_CODE_MAJOR;
-    info.software.firmware.minor = G_CODE_MINOR;
-    info.software.firmware.patch = G_CODE_PATCH;
-    info.software.firmware.build = G_CODE_BUILD;
+    info.software.firmware.major = J_CODE_MAJOR;
+    info.software.firmware.minor = J_CODE_MINOR;
+    info.software.firmware.patch = J_CODE_PATCH;
+    info.software.firmware.build = J_CODE_BUILD;
 
     info.hardware.hardwareID = nullptr;
 
@@ -38,21 +38,21 @@ sysInfo_t gardener::identifySystem()
     return info;
 }
 
-const char *gardener::getFirmwareStringShort()
+const char *jFramework::getFirmwareStringShort()
 {
     if (!firmwareShort[0])
-        sprintf(firmwareShort, "%d.%d.%d", G_CODE_MAJOR, G_CODE_MINOR, G_CODE_PATCH);
+        sprintf(firmwareShort, "%d.%d.%d", J_CODE_MAJOR, J_CODE_MINOR, J_CODE_PATCH);
     return firmwareShort;
 }
 
-const char *gardener::getFirmwareStringLong()
+const char *jFramework::getFirmwareStringLong()
 {
     if (!firmwareLong[0])
-        sprintf(firmwareLong, "%d.%d.%d:%05d", G_CODE_MAJOR, G_CODE_MINOR, G_CODE_PATCH, G_CODE_BUILD);
+        sprintf(firmwareLong, "%d.%d.%d:%05d", J_CODE_MAJOR, J_CODE_MINOR, J_CODE_PATCH, J_CODE_BUILD);
     return firmwareLong;
 }
 
-const char *gardener::getPCBRevisionString(PCBRevision rev)
+const char *jFramework::getPCBRevisionString(PCBRevision rev)
 {
     switch (rev)
     {

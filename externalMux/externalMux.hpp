@@ -1,17 +1,17 @@
-#ifndef G_EXTERNAL_MUX_H
-#define G_EXTERNAL_MUX_H
+#ifndef J_EXTERNAL_MUX_H
+#define J_EXTERNAL_MUX_H
 
-#include "gardenObject.hpp"
+#include "jObject.hpp"
 #include "ioPin.hpp"
 
-namespace gardener
+namespace jFramework
 {
-    class externalMux : public gardenObject
+    class externalMux : public jObject
     {
     public:
         externalMux(const char *name, uint16_t numChannels, ioPin *bit0 = nullptr, ioPin *bit1 = nullptr, ioPin *bit2 = nullptr, ioPin *bit3 = nullptr);
         virtual ~externalMux();
-        virtual g_err selectChannel(uint16_t channel);
+        virtual j_err selectChannel(uint16_t channel);
 
     protected:
         uint16_t _numChannels = 0;
@@ -21,6 +21,6 @@ namespace gardener
         ioPin **_pinList;
     };
 
-} // namespace gardener
+} // namespace jFramework
 
 #endif

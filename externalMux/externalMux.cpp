@@ -1,9 +1,9 @@
 #include "externalMux.hpp"
 
-using namespace gardener;
+using namespace jFramework;
 
-gardener::externalMux::externalMux(const char *name, uint16_t numChannels, ioPin *bit0, ioPin *bit1, ioPin *bit2, ioPin *bit3)
-    : gardenObject(name), _numChannels(numChannels)
+jFramework::externalMux::externalMux(const char *name, uint16_t numChannels, ioPin *bit0, ioPin *bit1, ioPin *bit2, ioPin *bit3)
+    : jObject(name), _numChannels(numChannels)
 {
     _numBits = 0;
     if (bit0)
@@ -46,19 +46,19 @@ gardener::externalMux::externalMux(const char *name, uint16_t numChannels, ioPin
     
 }
 
-gardener::externalMux::~externalMux()
+jFramework::externalMux::~externalMux()
 {
     delete[] _pinList;
 }
 
-g_err gardener::externalMux::selectChannel(uint16_t channel)
+j_err jFramework::externalMux::selectChannel(uint16_t channel)
 {
     if (channel >= _numChannels)
-        return G_ERR_INVALID_ARGS;
+        return J_ERR_INVALID_ARGS;
 
     for (size_t i = 0; i < _numBits; i++)
     {
         _pinList[i]->set((channel >> i) & 0x1);
     }
-    return G_OK;
+    return J_OK;
 }

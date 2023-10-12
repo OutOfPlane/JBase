@@ -1,9 +1,9 @@
 #include "ioPin.hpp"
 
-using namespace gardener;
+using namespace jFramework;
 
 ioPin::ioPin(const char *name, uint8_t pinNumber)
-    : gardenObject(name), _pinNumber(pinNumber)
+    : jObject(name), _pinNumber(pinNumber)
 {
     _connected = false;
 }
@@ -13,7 +13,7 @@ uint8_t ioPin::getNumber()
     return _pinNumber;
 }
 
-bool gardener::ioPin::isConnected()
+bool jFramework::ioPin::isConnected()
 {
     return _connected;
 }
@@ -32,32 +32,32 @@ ioPinDummy::ioPinDummy(const char *name)
 {
 }
 
-gardener::ioPinDummy::~ioPinDummy()
+jFramework::ioPinDummy::~ioPinDummy()
 {
 }
 
-g_err gardener::ioPinDummy::mode(pinDirection dir)
+j_err jFramework::ioPinDummy::mode(pinDirection dir)
 {
-    return G_OK;
+    return J_OK;
 }
 
-g_err gardener::ioPinDummy::set(uint8_t value)
+j_err jFramework::ioPinDummy::set(uint8_t value)
 {
-    return G_OK;
+    return J_OK;
 }
 
-g_err gardener::ioPinDummy::get(uint8_t &value)
+j_err jFramework::ioPinDummy::get(uint8_t &value)
 {
     value = 1;
-    return G_OK;
+    return J_OK;
 }
 
-bool gardener::ioPinDummy::canSet()
+bool jFramework::ioPinDummy::canSet()
 {
     return true;
 }
 
-bool gardener::ioPinDummy::canGet()
+bool jFramework::ioPinDummy::canGet()
 {
     return true;
 }

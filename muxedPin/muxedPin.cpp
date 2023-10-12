@@ -1,17 +1,17 @@
 #include "muxedPin.hpp"
 
-using namespace gardener;
+using namespace jFramework;
 
-gardener::muxedPin::muxedPin(const char *name, ioPin *sharedPin, externalMux *pinMux, uint8_t pinNumber)
+jFramework::muxedPin::muxedPin(const char *name, ioPin *sharedPin, externalMux *pinMux, uint8_t pinNumber)
 : ioPin(name, pinNumber), _sharedPin(sharedPin), _pinMux(pinMux)
 {
 }
 
-g_err gardener::muxedPin::getVoltage(int32_t &voltage_mV)
+j_err jFramework::muxedPin::getVoltage(int32_t &voltage_mV)
 {
-    g_err erg = G_ERR_OBJECT_LOCKED;
+    j_err erg = J_ERR_OBJECT_LOCKED;
     if(!_pinMux)
-        return G_ERR_INVALID_STATE;
+        return J_ERR_INVALID_STATE;
     if(_pinMux->lock(*this, 100))
     {
         _pinMux->selectChannel(_pinNumber);

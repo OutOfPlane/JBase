@@ -1,8 +1,8 @@
 #include "humidityTemperatureSensor.hpp"
 
-using namespace gardener;
+using namespace jFramework;
 
-gardener::humidityTemperatureSensor::humidityTemperatureSensor(const char *name)
-    : gardenObject(name)
+jFramework::humidityTemperatureSensor::humidityTemperatureSensor(const char *name)
+    : jObject(name)
 {
 }

@@ -1,10 +1,10 @@
-#ifndef G_TIMEOUT_H
-#define G_TIMEOUT_H
+#ifndef J_TIMEOUT_H
+#define J_TIMEOUT_H
 
 #include <stdint.h>
 #include <stdio.h>
 
-namespace gardener
+namespace jFramework
 {
     enum timeUnit
     {
@@ -33,6 +33,6 @@ namespace gardener
         int64_t _time_out;
     };
 
-} // namespace gardener
+} // namespace jFramework
 
 #endif
