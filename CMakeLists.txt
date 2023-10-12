@@ -16,11 +16,13 @@ FOREACH(child ${component_folders})
         IF(EXISTS ${child}/reqs.txt)
             FILE(STRINGS ${child}/reqs.txt component_reqs)
             FOREACH(req ${component_reqs})
-                LIST(APPEND component_requires ${src})
+                LIST(APPEND component_requires ${req})
             ENDFOREACH()
+            
         ENDIF()
     ENDIF()
 ENDFOREACH()
+
 
 idf_component_register(SRCS ${component_sources} INCLUDE_DIRS ${component_includes} REQUIRES ${component_requires})
 
